@@ -15,6 +15,12 @@ import {
     addPropertyRows,
     setOptions,
 } from './property-list.helpers';
+import { 
+    bathroomOptions, 
+    maxPriceOptions, 
+    minPriceOptions, 
+    roomOptions 
+} from './property-list.constants';
 
 // método de promises para llamar a un array de promesas que se realizan en paralelo
 Promise.all([
@@ -27,6 +33,10 @@ Promise.all([
     loadPropertyList(propertyList);
     setOptions(saleTypeList, 'select-sale-type', '¿Qué venta?');
     setOptions(provinceList, 'select-province', '¿Dónde?');
+    setOptions(roomOptions, 'select-room', '¿Habitaciones?');
+    setOptions(bathroomOptions, 'select-bathroom', '¿Cuántos baños?');
+    setOptions(minPriceOptions, 'select-min-price', 'Precio mínimo');
+    setOptions(maxPriceOptions, 'select-max-price', 'Precio máximo');
 });
 
 const loadPropertyList = (propertyList => {
