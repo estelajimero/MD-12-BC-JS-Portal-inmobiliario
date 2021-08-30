@@ -35,8 +35,8 @@ Promise.all([
     setOptions(provinceList, 'select-province', '¿Dónde?');
     setOptions(roomOptions, 'select-room', '¿Habitaciones?');
     setOptions(bathroomOptions, 'select-bathroom', '¿Cuántos baños?');
-    setOptions(minPriceOptions, 'select-min-price', 'Precio mínimo');
-    setOptions(maxPriceOptions, 'select-max-price', 'Precio máximo');
+    setOptions(minPriceOptions, 'select-min-price', 'Min (EUR)');
+    setOptions(maxPriceOptions, 'select-max-price', 'Max (EUR)');
 });
 
 const loadPropertyList = (propertyList => {
