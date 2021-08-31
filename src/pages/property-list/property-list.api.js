@@ -7,7 +7,7 @@ export const getPropertyList = (queryParams) =>
         return response.data;
     });
 
-// Para el tipo de venta (alquiler, venta, compartir, vacacional)
+// Para el tipo de operación (alquiler, venta, compartir, vacacional)
 const saleTypeListUrl = `${process.env.BASE_API_URL}/saleTypes`;
 
 export const getSaleTypeList = () => 
