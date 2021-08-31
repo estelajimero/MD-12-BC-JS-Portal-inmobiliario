@@ -10,10 +10,11 @@ import {
     getProvinceList, 
     getSaleTypeList 
 } from './property-list.api';
-import { mapPropertyListFromApiToVM } from './property-list.mappers';
+import { mapPropertyListFromApiToVM, mapFilterToQueryParams } from './property-list.mappers';
 import { 
     addPropertyRows,
     setOptions,
+    clearPropertyRows,
 } from './property-list.helpers';
 import { 
     bathroomOptions, 
@@ -21,6 +22,7 @@ import {
     minPriceOptions, 
     roomOptions 
 } from './property-list.constants';
+import { onUpdateField, onSubmitForm } from '../../common/helpers';
 
 // método de promises para llamar a un array de promesas que se realizan en paralelo
 Promise.all([
@@ -44,3 +46,69 @@ const loadPropertyList = (propertyList => {
     addPropertyRows(vMModelPropertyList);
 });
 
+let filter = {
+    saleTypeId: '',
+    provinceId: '',
+    minRooms: '',
+    minBathRooms: '',
+    minPrice: '',
+    maxPrice: '',
+};
+
+onUpdateField('select-sale-type', (event) => {
+    const value = event.target.value;
+    filter = {
+        ...filter,
+        saleTypeId: value,
+    };
+});
+
+onUpdateField('select-province', (event) => {
+    const value = event.target.value;
+    filter = {
+        ...filter,
+        provinceId: value,
+    };
+});
+
+onUpdateField('select-room', (event) => {
+    const value = event.target.value;
+    filter = {
+        ...filter,
+        minRooms: value,
+    };
+});
+
+onUpdateField('select-bathroom', (event) => {
+    const value = event.target.value;
+    filter = {
+        ...filter,
+        minBathRooms: value,
+    };
+});
+
+onUpdateField('select-min-price', (event) => {
+    const value = event.target.value;
+    filter = {
+        ...filter,
+        minPrice: value,
+    };
+});
+
+onUpdateField('select-max-price', (event) => {
+    const value = event.target.value;
+    filter = {
+        ...filter,
+        maxPrice: value,
+    };
+});
+
+onSubmitForm('search-button', () => {
+    const queryParams = mapFilterToQueryParams(filter);
+
+    clearPropertyRows();
+
+    getPropertyList(queryParams).then(propertyList => {
+        loadPropertyList(propertyList);
+    });
+});
