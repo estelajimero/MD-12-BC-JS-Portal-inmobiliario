@@ -7,13 +7,6 @@ export const getProperty = id =>
         return response.data;
     });
 
-const equipmentsUrl = `${process.env.BASE_API_URL}/equipments`;
-
-export const getEquipment = () => 
-    Axios.get(equipmentsUrl).then(response => {
-        return response.data;
-    });
-
 const contactUrl = `${process.env.BASE_API_URL}/contact`;
 
 export const isValidContact = form => 
