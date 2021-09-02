@@ -6,10 +6,10 @@
 
 import { history } from '../../core/router';
 import { 
-    getEquipment, 
     getProperty, 
     isValidContact 
 } from './property-detail.api';
+import { getEquipment } from '../../common/api/common.api';
 import { setPropertyValues } from './property-detail.helpers';
 import { mapPropertyFromApiToVM } from './property-detail.mappers';
 import { formValidation } from './property-detail.validations';
