@@ -6,19 +6,3 @@ export const getPropertyList = (queryParams) =>
     Axios.get(`${url}?${queryParams}`).then(response => {
         return response.data;
     });
-
-// Para el tipo de operación (alquiler, venta, compartir, vacacional)
-const saleTypeListUrl = `${process.env.BASE_API_URL}/saleTypes`;
-
-export const getSaleTypeList = () => 
-    Axios.get(saleTypeListUrl).then(response => {
-        return response.data;
-    });
-
-// Para la lista de provincias
-const provinceListUrl = `${process.env.BASE_API_URL}/provinces`;
-
-export const getProvinceList = () =>
-    Axios.get(provinceListUrl).then(response => {
-        return response.data;
-    });
