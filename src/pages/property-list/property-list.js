@@ -5,11 +5,8 @@
     * Recoger valores del filtro.
     * Utilizar filtro para filtrar en servidor. */
 
-import { 
-    getPropertyList, 
-    getProvinceList, 
-    getSaleTypeList 
-} from './property-list.api';
+import { getPropertyList } from './property-list.api';
+import { getProvinceList, getSaleTypeList } from '../../common/api/common.api';
 import { mapPropertyListFromApiToVM, mapFilterToQueryParams } from './property-list.mappers';
 import { 
     addPropertyRows,
