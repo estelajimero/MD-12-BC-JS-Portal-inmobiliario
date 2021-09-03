@@ -21,7 +21,7 @@ const getRoomWord = rooms => rooms > 1 ? 'habitaciones' : 'habitación';
 const getBathroomWord = bathrooms => bathrooms > 1 ? 'baños' : 'baño';
 
 const getEquipments = (property, equipmentsList) => {  
-    const equipments = property.equipmentIds.map(obj => {   
+    const equipments = property.equipmentsIds.map(obj => {   
       return equipmentsList.find(element => element.id === obj).name; 
     });
 
