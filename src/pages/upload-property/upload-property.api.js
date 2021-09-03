@@ -1,0 +1,8 @@
+import Axios from "axios";
+
+const url = `${process.env.BASE_API_URL}/upload-property`;
+
+export const saveProperty = newProperty =>
+    Axios.post(url, newProperty).then(response => {
+        return response.data;
+    });
