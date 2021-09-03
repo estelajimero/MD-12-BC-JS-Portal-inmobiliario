@@ -29,6 +29,7 @@ import {
     removeElement, 
 } from './upload-property.helpers';
 import { mapPropertyFromVMToApi } from './upload-property.mappers';
+import { formValidation } from './upload-property.validations';
 
 Promise.all([
     getSaleTypeList(),
@@ -45,6 +46,7 @@ Promise.all([
 });
 
 let newProperty = {
+    id: '',
     title: '',
     notes: '',
     email: '',
@@ -75,6 +77,10 @@ const setEvents = (list, id) => {
            } else {
                newProperty = removeElement(value, newProperty, id);
            };
+
+           formValidation.validateField('saleTypes', newProperty.saleTypes).then(result => {
+                onSetError('saleTypes', result);
+            });
         });
     });
 };
@@ -86,7 +92,11 @@ onUpdateField('title', (event) => {
     newProperty = {
         ...newProperty,
         title: value,
-    }
+    };
+
+    formValidation.validateField('title', newProperty.title).then(result => {
+        onSetError('title', result);
+    });
 });
 
 onUpdateField('notes', (event) => {
@@ -104,7 +114,11 @@ onUpdateField('email', (event) => {
     newProperty = {
         ...newProperty,
         email: value,
-    }
+    };
+
+    formValidation.validateField('email', newProperty.email).then(result => {
+        onSetError('email', result);
+    });
 });
 
 onUpdateField('phone', (event) => {
@@ -113,7 +127,11 @@ onUpdateField('phone', (event) => {
     newProperty = {
         ...newProperty,
         phone: value,
-    }
+    };
+
+    formValidation.validateField('phone', newProperty.phone).then(result => {
+        onSetError('phone', result);
+    });
 });
 
 onUpdateField('price', (event) => {
@@ -122,7 +140,11 @@ onUpdateField('price', (event) => {
     newProperty = {
         ...newProperty,
         price: value,
-    }
+    };
+
+    formValidation.validateField('price', newProperty.price).then(result => {
+        onSetError('price', result);
+    });
 });
 
 // Datos vivienda
@@ -132,7 +154,11 @@ onUpdateField('address', (event) => {
     newProperty = {
         ...newProperty,
         address: value,
-    }
+    };
+
+    formValidation.validateField('address', newProperty.address).then(result => {
+        onSetError('address', result);
+    });
 });
 
 onUpdateField('city', (event) => {
@@ -141,7 +167,11 @@ onUpdateField('city', (event) => {
     newProperty = {
         ...newProperty,
         city: value,
-    }
+    };
+
+    formValidation.validateField('city', newProperty.city).then(result => {
+        onSetError('city', result);
+    });
 });
 
 onUpdateField('province', (event) => {
@@ -150,7 +180,11 @@ onUpdateField('province', (event) => {
     newProperty = {
         ...newProperty,
         province: value,
-    }
+    };
+
+    formValidation.validateField('province', newProperty.province).then(result => {
+        onSetError('province', result);
+    });
 });
 
 onUpdateField('squareMeter', (event) => {
@@ -159,7 +193,11 @@ onUpdateField('squareMeter', (event) => {
     newProperty = {
         ...newProperty,
         squareMeter: value,
-    }
+    };
+
+    formValidation.validateField('squareMeter', newProperty.squareMeter).then(result => {
+        onSetError('squareMeter', result);
+    });
 });
 
 onUpdateField('rooms', (event) => {
@@ -168,7 +206,11 @@ onUpdateField('rooms', (event) => {
     newProperty = {
         ...newProperty,
         rooms: value,
-    }
+    };
+
+    formValidation.validateField('rooms', newProperty.rooms).then(result => {
+        onSetError('rooms', result);
+    });
 });
 
 onUpdateField('bathrooms', (event) => {
@@ -177,7 +219,11 @@ onUpdateField('bathrooms', (event) => {
     newProperty = {
         ...newProperty,
         bathrooms: value,
-    }
+    };
+
+    formValidation.validateField('bathrooms', newProperty.bathrooms).then(result => {
+        onSetError('bathrooms', result);
+    });
 });
 
 onUpdateField('locationUrl', (event) => {
@@ -186,7 +232,11 @@ onUpdateField('locationUrl', (event) => {
     newProperty = {
         ...newProperty,
         locationUrl: value,
-    }
+    };
+
+    formValidation.validateField('locationUrl', newProperty.locationUrl).then(result => {
+        onSetError('locationUrl', result);
+    });
 });
 
 // Insert features
@@ -218,5 +268,20 @@ onAddFile('add-image', image => {
 });
 
 onSubmitForm('save-button', () => {
-    console.log(newProperty);
+    formValidation.validateForm(newProperty).then(result => {
+        onSetFormErrors(result);
+
+        const mappedProperty = mapPropertyFromVMToApi(newProperty);
+
+        console.log(mappedProperty);
+
+        if (result.succeeded) {
+            saveProperty(mappedProperty).then(() => {
+                history.back();
+                alert('Nueva propiedad subida con éxito');
+            });
+        } else {
+            alert('Ocurrió un error al subir la propiedad');
+        }
+    });
 });
