@@ -1,5 +1,5 @@
 # MD-12-BC-JS-Portal-inmobiliario
-Caso práctico Módulo 12 - Bootcamp JavaScript - Portal de Banca online
+Caso práctico Módulo 12 - Bootcamp JavaScript - Portal inmobiliario
 
 Vamos a simular un portal inmobiliario, donde mostraremos un listado de propiedades, filtraremos por una serie de campos, mostraremos el detalle y subiremos una nueva.
 
